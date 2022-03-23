@@ -43,16 +43,8 @@ lazy val commonSettings = {
     )
 }
 
-lazy val publishSettings = Seq(
-    publishTo := {
-        // TODO
-        None
-    },
-    publishMavenStyle := true,
-)
-
 lazy val disablePublish = Seq(
-    publish := {}
+    skip.in( publish ) := true,
 )
 
 lazy val assemblySettings = Seq(
@@ -66,6 +58,24 @@ lazy val assemblySettings = Seq(
     test in assembly := {},
     mainClass in( Compile, run ) := Some( "Main" ),
 )
+
+sonatypeProfileName := "com.twosixlabs"
+inThisBuild(List(
+    organization := "com.twosixlabs.dart.users",
+    homepage := Some(url("https://github.com/twosixlabs-dart/dart-users")),
+    licenses := List("GNU-Affero-3.0" -> url("https://www.gnu.org/licenses/agpl-3.0.en.html")),
+    developers := List(
+        Developer(
+            "twosixlabs-dart",
+            "Two Six Technologies",
+            "",
+            url("https://github.com/twosixlabs-dart")
+        )
+    )
+))
+
+ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
+ThisBuild / sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
 
 
 /*
@@ -99,7 +109,6 @@ lazy val usersApi = ( project in file( "users-api" ) )
                               ++ json4s,
       dependencyOverrides ++= Seq( "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.9" )
                               ++ jackson,
-      publishSettings,
   )
 
 lazy val usersControllers = ( project in file( "users-controllers" ) )
@@ -111,7 +120,6 @@ lazy val usersControllers = ( project in file( "users-controllers" ) )
       libraryDependencies ++= dartRest ++ dartAuth ++ jackson ++ scalatra ++ jsonValidator,
       dependencyOverrides ++= Seq( "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.9" )
                               ++ jackson,
-      publishSettings,
    )
 
 lazy val usersMicroservice = ( project in file( "users-microservice" ) )
@@ -135,7 +143,6 @@ lazy val usersClient = ( project in file( "users-client" ) )
   .settings(
       commonSettings,
       libraryDependencies ++= betterFiles ++ okhttp ++ jackson,
-      publishSettings,
    )
 
 ThisBuild / useCoursier := false
