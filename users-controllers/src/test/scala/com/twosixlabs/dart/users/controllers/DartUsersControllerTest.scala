@@ -10,7 +10,7 @@ import com.twosixlabs.dart.auth.tenant.{CorpusTenant, GlobalCorpus, Leader, Memb
 import com.twosixlabs.dart.auth.user.stores.InMemoryUserStore
 import com.twosixlabs.dart.auth.user.{DartUser, DartUserInfo, DartUserStore}
 import com.twosixlabs.dart.rest.scalatra.models.FailureResponse
-import com.twosixlabs.dart.test.tags.annotations.WipTest
+import annotations.WipTest
 import com.twosixlabs.dart.users.api.models.DartUserDto
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.flatspec.AnyFlatSpecLike
@@ -64,7 +64,8 @@ class DartUsersControllerTest extends AnyFlatSpecLike with ScalatraSuite with Be
         override val userStore : DartUserStore = new InMemoryUserStore()
         override val serviceName : String = "users"
         override val secretKey : Option[ String ] = None
-        override val bypassAuth : Boolean = false
+        override val useDartAuth : Boolean = true
+        override val basicAuthCredentials : Seq[ (String, String) ] = Nil
     }
 
     val pmController = new DartUsersController( controllerDependencies ) {

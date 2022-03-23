@@ -12,11 +12,10 @@ object Dependencies {
     val jacksonVersion = "2.9.9"
     val okhttpVersion = "4.1.0"
     val scalaMockVersion = "4.1.0"
-    val cdr4sApisVersion = "2.0.67"
-    val cdr4sVersion = "2.0.220"
-    val dartCommonsVersion = "3.0.285"
-    val dartRestVersion = "3.0.15"
-    val dartAuthVersion = "3.0.133"
+    val cdr4sVersion = "3.0.9"
+    val dartCommonsVersion = "3.0.30"
+    val dartRestVersion = "3.0.4"
+    val dartAuthVersion = "3.1.11"
     val keycloak4sVersion = "2.4.0"
     val tapirVersion = "0.17.19"
     val json4sVersion = "3.6.11"
@@ -48,13 +47,12 @@ object Dependencies {
     val cdr4s = Seq( "com.twosixlabs.cdr4s" %% "cdr4s-core" % cdr4sVersion,
                      "com.twosixlabs.cdr4s" %% "cdr4s-dart-json" % cdr4sVersion )
 
-    val cdr4sApis = Seq( "com.twosixlabs.cdr4s" %% "cdr4s-apis" % cdr4sApisVersion )
-
     val dartCommons = Seq( "com.twosixlabs.dart" %% "dart-test-base" % dartCommonsVersion )
 
     val dartRest = Seq( "com.twosixlabs.dart.rest" %% "dart-scalatra-commons" % dartRestVersion )
 
-    val dartAuth = Seq( "com.twosixlabs.dart" %% "dart-auth-commons" % dartAuthVersion )
+    val dartAuth = Seq( "com.twosixlabs.dart.auth" %% "controllers" % dartAuthVersion,
+                        "com.twosixlabs.dart.auth" %% "keycloak-users" % dartAuthVersion )
 
     val keycloakAdminClient = Seq("org.keycloak" % "keycloak-admin-client" % "12.0.4")
 
