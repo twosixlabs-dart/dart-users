@@ -29,15 +29,17 @@ object DartUsersController {
     def apply(
         userStore : DartUserStore,
         serviceName : String,
-        secretKey : Option[ String ],
-        bypassAuth : Boolean,
+        secretKey : Option[ String ] = None,
+        useDartAuth : Boolean = true,
+        basicAuthCreds : Seq[ (String, String) ] = Nil,
     ) : DartUsersController = {
-        val us = userStore; val sn = serviceName; val sk = secretKey; val ba = bypassAuth
+        val us = userStore; val sn = serviceName; val sk = secretKey; val ua = useDartAuth; val bac = basicAuthCreds
         new Dependencies {
             override val userStore : DartUserStore = us
             override val serviceName : String = sn
             override val secretKey : Option[ String ] = sk
-            override val bypassAuth : Boolean = ba
+            override val useDartAuth : Boolean = ua
+            override val basicAuthCredentials : Seq[ (String, String) ] = bac
         } buildUsersController
     }
 
@@ -63,8 +65,9 @@ class DartUsersController( dependencies : DartUsersController.Dependencies )
   extends AsyncDartScalatraServlet with SecureDartController with MethodOverride {
 
     override val serviceName : String = dependencies.serviceName
-    override val bypassAuth : Boolean = dependencies.bypassAuth
+    override val useDartAuth : Boolean = dependencies.useDartAuth
     override val secretKey : Option[ String ] = dependencies.secretKey
+    override val basicAuthCredentials : Seq[ (String, String) ] = dependencies.basicAuthCredentials
 
     import dependencies.userStore
 

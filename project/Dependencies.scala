@@ -51,7 +51,8 @@ object Dependencies {
 
     val dartRest = Seq( "com.twosixlabs.dart.rest" %% "dart-scalatra-commons" % dartRestVersion )
 
-    val dartAuth = Seq( "com.twosixlabs.dart.auth" %% "controllers" % dartAuthVersion )
+    val dartAuth = Seq( "com.twosixlabs.dart.auth" %% "controllers" % dartAuthVersion,
+                        "com.twosixlabs.dart.auth" %% "keycloak-users" % dartAuthVersion )
 
     val keycloakAdminClient = Seq("org.keycloak" % "keycloak-admin-client" % "12.0.4")
 
