@@ -64,7 +64,8 @@ class DartUsersControllerTest extends AnyFlatSpecLike with ScalatraSuite with Be
         override val userStore : DartUserStore = new InMemoryUserStore()
         override val serviceName : String = "users"
         override val secretKey : Option[ String ] = None
-        override val bypassAuth : Boolean = false
+        override val useDartAuth : Boolean = true
+        override val basicAuthCredentials : Seq[ (String, String) ] = Nil
     }
 
     val pmController = new DartUsersController( controllerDependencies ) {
